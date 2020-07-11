@@ -12,15 +12,16 @@ def play(m):
     sum = 0
     while (sum <= 21 and m != []):
         sum = sum + m.pop(0)
-    return m
+    return ("The new deck is {} and the sum is: {}".format(m,sum))
+#%%
+def play_many(m,j):
+    
 
 #%%
 n=int(input("Insert the number of cards in your deck: "))
 
 n=deck_of_cards(n)
-
 print(n)
 print(play(n))
-print(n)
 
 # %%
