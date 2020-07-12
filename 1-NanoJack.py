@@ -37,6 +37,7 @@ def who_won(res):
         else:
             winners.append(0)
     return res,winners
+#%%
 
 
 
