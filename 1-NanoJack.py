@@ -17,6 +17,7 @@ def deck_of_cards(n):
     deck = []
     for i in range(n):
         deck.append(random.randint(1,14))
+        i+=1
     return deck
 #%%
 def play(m):
@@ -34,6 +35,7 @@ def play_many(m,j):
             sum = sum + m.pop(0)
         res.append(sum)
         sum = 0
+        i+=1
     return res
 #%%
 def who_won(res):
@@ -57,6 +59,7 @@ def experiment(deck,rep,n):
         winners = who_won(play_many(d,n))
         for k in range (len(res)):
             res[k] = res[k]+winners[k]
+        i+=1
     return res
 #%%
 print(experiment(1000,30,10))
