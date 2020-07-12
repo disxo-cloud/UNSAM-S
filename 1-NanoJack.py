@@ -15,16 +15,30 @@ def play(m):
     return ("The new deck is {} and the sum is: {}".format(m,sum))
 #%%
 def play_many(m,j):
+    res = []
     sum = 0
     i = 0
-    c = 0
     for i in range (0,j,1):
         while (sum <= 21 and m != []):
             sum = sum + m.pop(0)
-        c+=1
-        print("El jugador {} obtiene {}".format(c,sum))
+        res.append(sum)
         sum = 0
-    return m
+    return res
+#%%
+def who_won(res):
+    max = res[0]
+    for a in res:
+        if a > max:
+            max = a
+    winners = []
+    for i in range(len(res)):
+        if max == res[i]:
+            winners.append(1)
+        else:
+            winners.append(0)
+    return res,winners
+
+
 
 #%%
 n=int(input("Insert the number of cards in your deck: "))
@@ -32,4 +46,4 @@ n=int(input("Insert the number of cards in your deck: "))
 n=deck_of_cards(n)
 print(n)
 print(play(n))
-print(play_many(n,3))
+print(who_won(play_many(n,10)))
