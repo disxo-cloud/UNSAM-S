@@ -29,7 +29,7 @@ def play_many(m,j):
 def who_won(res):
     max = res[0]
     for a in res:
-        if a > max:
+        if a >= max:
             max = a
     winners = []
     for i in range(len(res)):
@@ -38,13 +38,15 @@ def who_won(res):
         else:
             winners.append(0)
     return winners
+
 #%%
 def experiment(deck,rep,n):
     d = deck_of_cards(deck)
     res = [0] * n
     for i in range(rep):
         winners = who_won(play_many(d,n))
-        res = (list(map(add,res,winners)))
-x    return res
+        for k in range (len(res)):
+            res[k] = res[k]+winners[k]
+    return res
 #%%
-print(experiment(21,10,10))
+print(experiment(1000,30,10))
