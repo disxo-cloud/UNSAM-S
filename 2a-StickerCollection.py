@@ -38,6 +38,5 @@ def fill_many(le,times):
         result.append(counter)
         counter = 0
         album = make_album(le)
-    return print("mean of arr : ", np.mean(result)) 
-
-print(fill_many(10,100))
+    return ("mean of arr : ", np.mean(result)) 
+print(fill_many(670,100))
