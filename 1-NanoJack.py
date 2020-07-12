@@ -38,8 +38,12 @@ def who_won(res):
             winners.append(0)
     return res,winners
 #%%
-
-
+def experiment(deck,rep,n):
+    winners = []
+    d = deck_of_cards(deck)
+    for i in range(rep):
+        winners = who_won(play_many(d,n))
+    return d
 
 #%%
 n=int(input("Insert the number of cards in your deck: "))
@@ -48,3 +52,4 @@ n=deck_of_cards(n)
 print(n)
 print(play(n))
 print(who_won(play_many(n,10)))
+print(experiment(21,10,3))
