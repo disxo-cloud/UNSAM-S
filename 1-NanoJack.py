@@ -1,5 +1,15 @@
 import random
-from operator import add
+#%%
+'''
+This is NanoJack a cut down version of blackjack the rules of which are:
+-The player picks cards until the value is as close to 21 as possible.
+-The deck has random cards from 1 to 14.
+-The player with most points in its hand will win.
+-This is a pure luck-based game, in which we make a few different functions:
+-deck_of_cards(n) makes a random list of cards in which n is its length.
+-play(m) pops out the cards and picks cards until It reaches 21
+-who_won decides which player winds, in case of a tie, the players win.
+'''
 #%%
 def deck_of_cards(n):
     if n is str:
@@ -11,7 +21,7 @@ def deck_of_cards(n):
 #%%
 def play(m):
     sum = 0
-    while (sum <= 21 and m != []):
+    while (sum < 22 and m != []):
         sum = sum + m.pop(0)
     return ("The new deck is {} and the sum is: {}".format(m,sum))
 #%%
@@ -20,7 +30,7 @@ def play_many(m,j):
     sum = 0
     i = 0
     for i in range (0,j,1):
-        while (sum <= 21 and m != []):
+        while (sum < 22 and m != []):
             sum = sum + m.pop(0)
         res.append(sum)
         sum = 0
