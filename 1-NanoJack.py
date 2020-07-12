@@ -1,5 +1,6 @@
 import random
-
+from operator import add
+#%%
 def deck_of_cards(n):
     if n is str:
         raise TypeError("Please input an integer")
@@ -36,20 +37,14 @@ def who_won(res):
             winners.append(1)
         else:
             winners.append(0)
-    return res,winners
+    return winners
 #%%
 def experiment(deck,rep,n):
-    winners = []
     d = deck_of_cards(deck)
+    res = [0] * n
     for i in range(rep):
         winners = who_won(play_many(d,n))
-    return d
-
+        res = (list(map(add,res,winners)))
+x    return res
 #%%
-n=int(input("Insert the number of cards in your deck: "))
-
-n=deck_of_cards(n)
-print(n)
-print(play(n))
-print(who_won(play_many(n,10)))
-print(experiment(21,10,3))
+print(experiment(21,10,10))
