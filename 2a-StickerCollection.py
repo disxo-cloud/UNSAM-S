@@ -1,6 +1,15 @@
 import random
 import numpy as np
 #%%
+'''
+2a - Simple Sticker Collection.(Buying without packs)
+-is_there(checks if element is in album)
+-buy_sticker(returns a sticker)
+-fill_once, returns a counter and the filled album with repeats
+-fill_many, fills a list with the counter in x times, returns
+mean value of filling many albums
+'''
+#%%
 def make_album(le):
     return [0]*le
 print(make_album(10))
