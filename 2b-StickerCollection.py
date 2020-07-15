@@ -1,5 +1,5 @@
 import random
-import numpy as numpy
+import numpy as np
 #%%
 '''
 2a - Complex Sticker Collection with packs.(See: 2a)
@@ -27,14 +27,27 @@ print(make_pack(10,3))
 def how_many_packs(le,cards):
     counter = 0
     album = make_album(le)
-    print(album)
     while is_there(album,0) is True:
         random_deck = make_pack(le,cards)
         for i in range(len(random_deck)):
             album[random_deck[i]] += 1
         random_deck = []
         counter += 1
-    return counter, album
+    return counter
 
 print(how_many_packs(670,5))
 #%%
+def mean_how_many_packs(n,le,cards):
+    mean = []
+    for k in range(n):
+        counter = 0
+        album = make_album(le)
+        while is_there(album,0) is True:
+            random_deck = make_pack(le,cards)
+            for i in range(len(random_deck)):
+                album[random_deck[i]] += 1
+            random_deck = []
+            counter += 1
+        mean.append(counter)
+    return np.mean(mean)
+print(mean_how_many_packs(1000,682,5))
