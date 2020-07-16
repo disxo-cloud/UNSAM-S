@@ -51,27 +51,28 @@ def mean_how_many_packs(n,le,cards):
 #%%
 #We will now plot the probabilities of filling the album#
 def percentage_pack(Npacks,le,pre,cards):
-    count = []
+    count = [0]
     per = []
     percentage = []
     counter = 0
     for i in range(pre):
         album = make_album(le)
         for k in range(Npacks):
+            count = []
             random_deck = make_pack(le,cards)
             for j in range(len(random_deck)):
                 album[random_deck[j]] += 1
             for l in range(len(album)):
                 if album[l] != 0:
                     counter += 1
-            print(counter)
             count.append(counter)
             counter = 0
-        per.append((count[-1]*100)/le)
+        per.append((count[0]*100)/le)
     percentage.append(np.mean(per))
+    per = []
     return np.mean(percentage)
 
-print(percentage_pack(10,682,1,500))
+print(percentage_pack(900,682,1,5))
 
 
 #%%
@@ -82,7 +83,7 @@ def percentages_packs(N,le,pre,cards):
     return li
 
 
-height = (percentages_packs(100,682,1,5))
+height = (percentages_packs(1000,682,1,5))
 #%%
 y_pos = (np.arange(len(height)))
 plt.bar(y_pos,height)
