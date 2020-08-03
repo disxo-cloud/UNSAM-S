@@ -21,7 +21,7 @@ def make_pack(le,cards):
         pack.append(random.randint(0,le-1))
     return pack
 #I take 0 as one of the possible values#
-#If the album has [0,0,0] it will be filled by [0,1,2]#
+#If the album is [0,0,0] it will be filled by [0,1,2]#
 #%%
 def how_many_packs(le,cards):
     counter = 0
@@ -76,13 +76,13 @@ print(percentage_pack(900,682,1,5))
 
 
 #%%
+#This plot will determine those probabilities
+#It takes time and will never tell the optimum number#
 def percentages_packs(N,le,pre,cards):
     li = []
     for i in range(N):
         li.append(percentage_pack(i,le,pre,cards))
     return li
-
-
 height = (percentages_packs(1000,682,1,5))
 #%%
 y_pos = (np.arange(len(height)))
