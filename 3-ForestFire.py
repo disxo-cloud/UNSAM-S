@@ -23,31 +23,19 @@ def update_bars(num, bars):
     if a == 0:        
         i = random.randint(0, len(dx))
         dz[i] += 1
+        bars[i].remove()
         bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=random.choice(['g']))
         return bars
     if a == 1:        
         i = random.randint(0, len(dx))
-        dz[i] = -1
-        bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=random.choice(['r']))
-        return bars
-
-def update_bars0(num, bars):
-    a = random.randint(0,1)
-    if a == 0:        
-        i = random.randint(0, len(dx))
-        dz[i] += 5
-        bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=random.choice(['g']))
-        return bars
-    if a == 1:        
-        i = random.randint(0, len(dx))
-        dz[i] = -1
-        bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=random.choice(['r']))
+        dz[i] = 0
+        bars[i].remove()
+        bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=random.choice(['b']))
         return bars
 
 def updateall(num,bars):
     a = update_bars(num,bars)
-    b = update_bars0(num,bars)
-    return a + b
+    return a
 
 #%%
 
@@ -71,9 +59,10 @@ a = n*n
 
 # add bars
 bars = []
+
 for i in range(len(dx)):
     bars.append(ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=['g']))
 ax.set_title('Beta Forestal')
 
-line_ani = animation.FuncAnimation(fig, updateall, 20, fargs=[bars], interval=100, blit=False)
+line_ani = animation.FuncAnimation(fig, updateall, 10, fargs=[bars], interval=1, blit=False)
 plt.show()
