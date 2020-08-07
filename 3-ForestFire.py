@@ -26,29 +26,93 @@ def generate_forest(n):
 #%%
 
 #Functions that we will use to work on the empty Forest#
+#River needs some work for more organic forms#
 
-def update_bars(num, bars):
-    a = random.randint(0,1)
-    if a == 0:        
-        i = random.randint(0, len(dx))
-        dz[i] += 1
+def spawn_river(num, bars):
+    if dz.count(-0.5) < m:
+        i = random.randint(0,len(dx))
+        dz[i] = -0.5
         bars[i].remove()
-        bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=random.choice(['g']))
+        bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=['b'])
         return bars
-    if a == 1:        
+    else:
+        return bars
+
+#%%
+
+def spawn_trees(num, bars):
+    countTrees = dz.count(1)
+    while ((countTrees) < len(dz)*(j/100)):#Fills until desired %#
         i = random.randint(0, len(dx))
-        dz[i] = 0
-        bars[i].remove()
-        bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=random.choice(['b']))
+        if dz[i] == -0.5:
+            return bars
+        else:
+            dz[i] = 1
+            bars[i].remove()
+            bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=['g'])
+            countTrees += 1
+            return bars
+    return bars
+#%%
+#Spawning Thunder#
+def spawn_thunder(num,bars):
+    a = random.random()
+    if a >= 0.7:   
+        i = random.randint(0, len(dx))
+        if dz[i] == -0.5:
+            return bars
+        if dz[i] == 0:
+            return bars
+        else:
+            dz[i] = 0.5
+            bars[i].remove()
+            bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=['r'])
+            return bars
+    else:        
         return bars
+#%%
+'''
+#Propagate Fire#
+
+def propagate_fire(num,bars):
+    i = random.randint(0,len(dx))
+    while dz.count(0.5) != 0:
+        bars[i].remove()
+        bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], 0.5, color=['magenta'])
+        if bars[i + 1] == 1:
+            bars[i+1].remove()
+            bars[i+1] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], 0.5, color=['magenta'])
+        elif bars[i - 1] == 1:
+            bars[i-1].remove()
+            bars[i-1] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], 0.5, color=['magenta'])
+        return bars
+    while dz.count(0.5) != 0:
+        if bars[i] == 0.5:
+            bars[i].remove()
+            bars[i] = ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], 0.5, color=['springgreen'])
+    return bars
+
+'''
+
+
+#%%
 
 def updateall(num,bars):
-    a = update_bars(num,bars)
-    return a
+    a = spawn_river(num,bars)
+    b = spawn_trees(num,bars)
+    c = spawn_thunder(num,bars)
+    '''
+    d = propagate_fire(num,bars)
+    '''
+    return a + b + c
 
 #%%
 
 n = int(input("Please Input the length of the forest grid: "))
+j = int(input("Input the percentage of terrain covered in trees p/turn: "))
+m = int(input("Input the length of the river: "))
+k = int(input("Input the chance of thunder per tile: "))
+
 
 fig = plt.figure()
 ax = p3.Axes3D(fig)
@@ -68,7 +132,7 @@ a = n*n
 
 bars = []
 for i in range(len(dx)):
-    bars.append(ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=['g']))
+    bars.append(ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=['springgreen']))
 ax.set_title('Beta Forestal')
 
 line_ani = animation.FuncAnimation(fig, updateall, 10, fargs=[bars], interval=1, blit=False)
