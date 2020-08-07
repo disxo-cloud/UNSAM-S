@@ -1,9 +1,15 @@
+#%%
+import math
+import random
+import numpy as np
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as p3
 import matplotlib.animation as animation
-import numpy as np
-import random
-import math
+
+#%%
+#Function to generate a forest#
+#Forest is a 3d grid, xpos, ypos and zpos determine Position#
+#dx dy and dz are always 1,1, and 0 to make 1x1 cubes#
 
 def generate_forest(n):
     arr = []
@@ -18,6 +24,9 @@ def generate_forest(n):
     return xpos,ypos,zpos,dx,dy,dz
 
 #%%
+
+#Functions that we will use to work on the empty Forest#
+
 def update_bars(num, bars):
     a = random.randint(0,1)
     if a == 0:        
@@ -57,12 +66,15 @@ print(dy)
 
 a = n*n 
 
-# add bars
 bars = []
-
 for i in range(len(dx)):
     bars.append(ax.bar3d(xpos[i], ypos[i], zpos[i], dx[i], dy[i], dz[i], color=['g']))
 ax.set_title('Beta Forestal')
 
 line_ani = animation.FuncAnimation(fig, updateall, 10, fargs=[bars], interval=1, blit=False)
 plt.show()
+
+#%%
+
+
+
